@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart</title>
+  <!-- Include your CSS stylesheets here -->
+  <style>
+    /* Reset some default styles */
+body, ul {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.section-title {
+  margin-bottom: 20px;
+}
+
+.cart-items {
+  list-style: none;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+
+.cart-item-content {
+  display: flex;
+  align-items: center;
+}
+
+.cart-item-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.cart-item-name {
+  font-weight: bold;
+}
+
+.cart-item-actions button {
+  margin-left: 10px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.cart-item-actions button:hover {
+  background-color: #2980b9;
+}
+
+  </style>
+</head>
+
+<body>
+    <section class="section cart" id="cart" aria-label="cart">
+        <div class="container">
+          <h2 class="h2 section-title">
+            Your Shopping <span class="span">Cart</span>
+          </h2>
+    
+          <ul class="cart-items">
+            <!-- JavaScript will populate this list -->
+          </ul>
+        </div>
+      </section>
+
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+  const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartList = document.querySelector(".cart-items");
+
+  console.log("cartItems:", cartItems);
+
+  cartItems.forEach((product) => {
+    console.log("product:", product);
+console.log(product.image)
+    const cartItem = document.createElement("li");
+    cartItem.className = "cart-item";
+    cartItem.innerHTML = `
+      <div class="cart-item-content">
+        <img src="${product.image}" alt="${product.name}" class="cart-item-image">
+        <div>
+          <h3 class="cart-item-name">${product.name}</h3>
+          <p class="cart-item-price">${product.price}</p>
+        </div>
+      </div>
+      <div class="cart-item-actions">
+        <button class="add-btn">Add More</button>
+        <button class="remove-btn">Remove</button>
+      </div>
+    `;
+
+    cartList.appendChild(cartItem);
+  });
+});
+
+
+
+
+  </script>
+</body>
+</html>
